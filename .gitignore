@@ -1,0 +1,40 @@
+# Virtualenvs
+venv/
+.env/
+.venv/
+env/
+
+# config local 
+*.env
+config.json
+
+# Cache of Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+*.out
+*.err
+
+# IDEs
+.idea/
+.vscode/
+
+# Build 
+build/
+dist/
+*.egg-info/
+
+# temp files
+*.tmp
+*.bak
+*.swp
+
+# tests
+.coverage
+htmlcov/
+
+
