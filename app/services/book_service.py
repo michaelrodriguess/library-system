@@ -14,3 +14,6 @@ class BookService:
     
     def get_books_by_author(self, author: str) -> list[Book]:
         return self.repository.get_books_by_author(author)
+    
+    def get_books_by_title(self, title: str) -> list[Book]:
+        return self.repository.get_books_by_title(title)

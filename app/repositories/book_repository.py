@@ -39,3 +39,14 @@ class BookRepository:
         except Exception as e:
             print(f"Error getting books by author: {e}")
             raise
+
+    def get_books_by_title(self, title: str) -> list[Book]:
+        try:
+            with get_connection() as conn:
+                with conn.cursor(dictionary=True) as cursor:
+                    cursor.execute("SELECT id, title, author, description FROM books WHERE title = %s", (title,))
+                    rows = cursor.fetchall()
+                    return [Book(**row) for row in rows]
+        except Exception as e:
+            print(f"Error getting books by title: {e}")
+            raise

@@ -16,3 +16,7 @@ def get_books():
 @router.get("/author/{author}", response_model=list[BookResponse])
 def get_books_by_author(author: str):
     return service.get_books_by_author(author)
+
+@router.get("/title/{title}", response_model=list[BookResponse])
+def get_books_by_title(title: str):
+    return service.get_books_by_title(title)
