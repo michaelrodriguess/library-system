@@ -20,4 +20,6 @@ class BookService:
     
     def delete_book(self, book_id: int) -> None:
         self.repository.delete_book(book_id)
-        
+
+    def update_book(self, book_id: int, **fields) -> Book:
+        return self.repository.update_book(book_id, **fields)

@@ -59,3 +59,23 @@ class BookRepository:
         except Exception as e:
             print(f"Error deleting book: {e}")
             raise
+
+    def update_book(self, book_id: int, **fields) -> Book:
+        try:
+            updates = ", ".join(f"{key} = %s" for key in fields.keys())
+            values = list(fields.values()) + [book_id]
+
+            with get_connection() as conn:
+                with conn.cursor(dictionary=True) as cursor:
+                    cursor.execute(f"UPDATE books SET {updates} WHERE id = %s", values)
+
+                    cursor.execute("SELECT id, title, author, description FROM books WHERE id = %s", (book_id,))
+                    row = cursor.fetchone()
+
+                    if row:
+                        return Book(**row)
+                    else:
+                        raise ValueError(f"Book with id {book_id} not found.")
+        except Exception as e:
+            print(f"Error updating book: {e}")
+            raise

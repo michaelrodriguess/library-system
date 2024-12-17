@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.services.book_service import BookService
-from app.schemas.book import BookCreate, BookResponse
+from app.schemas.book import BookCreate, BookResponse, BookUpdate
 
 router = APIRouter()
 service = BookService()
@@ -25,3 +25,7 @@ def get_books_by_title(title: str):
 def delete_book(book_id: str):
     service.delete_book(book_id)
     return {"message": "Book with id '{book_id}' was deleted successfully."}
+
+@router.patch("/{book_id}", response_model=BookResponse)
+def update_book(book_id: int, book: BookUpdate):
+    return service.update_book(book_id, **book.dict(exclude_unset=True))
