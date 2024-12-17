@@ -18,7 +18,7 @@ class BookRepository:
             # conn.rollback() Revert changes if something goes wrong
             raise
 
-    def get_books(self) -> list[Book]:
+    def get_all_books(self) -> list[Book]:
         try:
             with get_connection() as conn:
                 with conn.cursor(dictionary=True) as cursor:
@@ -27,4 +27,15 @@ class BookRepository:
                     return [Book(**row) for row in rows]
         except Exception as e:
             print(f"Error getting books: {e}")
+            raise
+
+    def get_books_by_author(self, author: str) -> list[Book]:
+        try:
+            with get_connection() as conn:
+                with conn.cursor(dictionary=True) as cursor:
+                    cursor.execute("SELECT id, title, author, description FROM books WHERE author = %s", (author,))
+                    rows = cursor.fetchall()
+                    return [Book(**row) for row in rows]
+        except Exception as e:
+            print(f"Error getting books by author: {e}")
             raise

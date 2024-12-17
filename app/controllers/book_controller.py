@@ -11,4 +11,8 @@ def create_book(book: BookCreate):
 
 @router.get("/", response_model=list[BookResponse])
 def get_books():
-    return service.get_books()
+    return service.get_all_books()
+
+@router.get("/author/{author}", response_model=list[BookResponse])
+def get_books_by_author(author: str):
+    return service.get_books_by_author(author)
