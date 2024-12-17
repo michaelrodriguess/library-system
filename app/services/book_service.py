@@ -17,3 +17,7 @@ class BookService:
     
     def get_books_by_title(self, title: str) -> list[Book]:
         return self.repository.get_books_by_title(title)
+    
+    def delete_book(self, book_id: int) -> None:
+        self.repository.delete_book(book_id)
+        

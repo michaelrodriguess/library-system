@@ -50,3 +50,12 @@ class BookRepository:
         except Exception as e:
             print(f"Error getting books by title: {e}")
             raise
+
+    def delete_book(self, book_id: int) -> None:
+        try:
+            with get_connection() as conn:
+                with conn.cursor() as cursor:
+                    cursor.execute("DELETE FROM books WHERE id = %s", (book_id,))
+        except Exception as e:
+            print(f"Error deleting book: {e}")
+            raise

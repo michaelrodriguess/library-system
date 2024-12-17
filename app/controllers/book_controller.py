@@ -20,3 +20,8 @@ def get_books_by_author(author: str):
 @router.get("/title/{title}", response_model=list[BookResponse])
 def get_books_by_title(title: str):
     return service.get_books_by_title(title)
+
+@router.delete("/{book_id}")
+def delete_book(book_id: str):
+    service.delete_book(book_id)
+    return {"message": "Book with id '{book_id}' was deleted successfully."}
