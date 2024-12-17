@@ -9,5 +9,5 @@ class BookService:
         book = Book(title=title, author=author, description=description)
         return self.repository.create_book(book)
 
-    def list_books(self) -> list[Book]:
+    def get_books(self) -> list[Book]:
         return self.repository.get_books()

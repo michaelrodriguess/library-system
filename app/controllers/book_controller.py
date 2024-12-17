@@ -10,5 +10,5 @@ def create_book(book: BookCreate):
     return service.add_book(**book.dict())
 
 @router.get("/", response_model=list[BookResponse])
-def list_books():
-    return service.list_books()
+def get_books():
+    return service.get_books()
